@@ -6,7 +6,6 @@
 # end                              # end
 
 
-
 def can_be_instantiated_and_then_saved
   movie = Movie.new
   movie.title = "This is a title."
@@ -95,6 +94,8 @@ def can_destroy_all_items_at_once
   end
   Movie.destroy_all
 end
+
+
 
 # def can_be_instantiated_and_then_saved
 #   movie = __
