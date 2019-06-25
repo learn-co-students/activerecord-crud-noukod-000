@@ -24,8 +24,8 @@ describe 'Movie' do
     end
 
     it 'has a director' do
-      movie.director = "The Wachowski Sisters"
-      expect(movie.director).to eq("The Wachowski Sisters")
+      movie.director = "The Wachowski Brothers"
+      expect(movie.director).to eq("The Wachowski Brothers")
     end
 
     it 'has a lead actor/actress' do
@@ -69,38 +69,30 @@ describe 'Movie' do
         expect(Movie.find_by(attributes)).to eq(movie)
       end
 
-      it 'can be created in a block when no args are passed' do
+      it 'can be created in a block' do
         movie = can_be_created_in_a_block
 
-        expect(movie.title).to eq("Home Alone")
-        expect(movie.release_date).to eq(1990)
+        expect(Movie.last).to eq(movie)
+        expect(Movie.last.title).to eq("Home Alone")
+        expect(Movie.last.release_date).to eq(1990)
       end
-
-      it 'can be created in a block' do
-        args = { title: "The Room", release_date: 2003 }
-        movie = can_be_created_in_a_block(args)
-
-        expect(movie.title).to eq("The Room")
-        expect(movie.release_date).to eq(2003)
-      end
-   end
+    end
 
     context 'reading' do
       before do
         5.times do |i|
           Movie.create(title: "Movie_#{i}", release_date: i+2000)
         end
-        Movie.last.update_attribute(:id, 999)
       end
 
       it 'can get the first item in the database' do
         movie = can_get_the_first_item_in_the_database
-        expect(movie.title).to eq("Movie_0")
+        expect(movie).to eq("Movie_0")
       end
 
       it 'can get the last item in the databse' do
         movie = can_get_the_last_item_in_the_database
-        expect(movie.title).to eq("Movie_4")
+        expect(movie).to eq("Movie_4")
       end
 
       it 'can get size of the database' do
@@ -109,7 +101,7 @@ describe 'Movie' do
       end
 
       it 'can retrive the first item from the database by id' do
-        expect(can_find_the_first_item_from_the_database_using_id.title).to eq("Movie_0")
+        expect(can_find_the_first_item_from_the_database_using_id).to eq("Movie_0")
       end
 
       it 'can retrieve from the database using different attributes' do
